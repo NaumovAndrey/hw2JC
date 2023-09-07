@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static final int WIN_COUNT = 4; // Выигрышная комбинация
+    private static final int WIN_COUNT = 3; // Выигрышная комбинация
     private static final char DOT_HUMAN = 'X'; // Фишка игрока - человек
     private static final char DOT_AI = '0'; // Фишка игрока - компьютер
     private static final char DOT_EMPTY = '*'; // Признак пустого поля
@@ -13,8 +13,8 @@ public class Main {
 
     private static char[][] field; // Двуxмерный массив хранит текущее состояние игрового поля
 
-    private static final int FIELDSIZE_X = 3; // Размерность игрового поля
-    private static final int FIELDSIZE_Y = 3; // Размерность игрового поля
+    private static final int FIELDSIZE_X = 4; // Размерность игрового поля
+    private static final int FIELDSIZE_Y = 5; // Размерность игрового поля
 
 
     public static void main(String[] args) {
@@ -163,7 +163,7 @@ public class Main {
      * @return
      */
     private static boolean checkGameState(char c, String s) {
-        if (checkWin(c)) {
+        if (checkWinV2(c)) {
             System.out.println(s);
             return true;
         }
@@ -218,9 +218,17 @@ public class Main {
         return false;
     }
 
+    /**
+     * gпо горизонтали
+     * @return
+     */
     static boolean check1() {
         int x = field.length;
         int y = field[0].length;
+
+        System.out.println(x);
+        System.out.println(y);
+
 
         for (int i = 0; i < x; i++){
             for (int j = 0; j <= y - WIN_COUNT; j++) {
