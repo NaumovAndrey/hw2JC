@@ -11,7 +11,7 @@ public class Main {
     private static final Scanner scanner = new Scanner(System.in);
     private static final Random random = new Random();
 
-    private static char[][] field; // Двумерный массив хранит текущее состояние игрового поля
+    private static char[][] field; // Двуxмерный массив хранит текущее состояние игрового поля
 
     private static final int FIELDSIZE_X = 3; // Размерность игрового поля
     private static final int FIELDSIZE_Y = 3; // Размерность игрового поля
@@ -200,19 +200,35 @@ public class Main {
         return false;
     }
 
+    /**
+     * Проверка победы
+     * @param c
+     * @return
+     */
     private static boolean checkWinV2(char c) {
         for (int x = 0; x < FIELDSIZE_X; x++) {
             for (int y = 0; y < FIELDSIZE_Y; y++) {
-                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                if (field[x][y] == field[x + 1][y] && field[x][y] == field[x + 2][y]) return true;
+                //if (field[x][y] == field[x + 1][y] && field[x][y] == field[x + 2][y]) return true; // по горизонтали для 3х
+                if (check1(x, y, WIN_COUNT, c)) return true;
+
             }
         }
 
         return false;
     }
 
-    static boolean check1(int x, int y, int win) {
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    static boolean check1(int i, int j, int win, char c) {
+        for (int x = 0; x < FIELDSIZE_X; x++) {
+        int count = 0;
+            for (int y = 0; y < FIELDSIZE_Y; y++){
+                if (field[x][y] == c){
+                    count++;
+                    if (count == win) return true;
+                }
+            }
+
+
+
         return false;
     }
 
