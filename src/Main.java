@@ -53,7 +53,7 @@ public class Main {
 
     /**
      * Отрисовка игрового поля
-
+     * <p>
      * +-1-2-3-
      * 1|*|X|0|
      * 2|*|*|0|
@@ -202,6 +202,7 @@ public class Main {
 
     /**
      * Проверка победы
+     *
      * @param c
      * @return
      */
@@ -209,7 +210,7 @@ public class Main {
         for (int x = 0; x < FIELDSIZE_X; x++) {
             for (int y = 0; y < FIELDSIZE_Y; y++) {
                 //if (field[x][y] == field[x + 1][y] && field[x][y] == field[x + 2][y]) return true; // по горизонтали для 3х
-                if (check1(x, y, WIN_COUNT, c)) return true;
+                if (check1()) return true;
 
             }
         }
@@ -217,18 +218,26 @@ public class Main {
         return false;
     }
 
-    static boolean check1(int i, int j, int win, char c) {
-        for (int x = 0; x < FIELDSIZE_X; x++) {
-        int count = 0;
-            for (int y = 0; y < FIELDSIZE_Y; y++){
-                if (field[x][y] == c){
-                    count++;
-                    if (count == win) return true;
+    static boolean check1() {
+        int x = field.length;
+        int y = field[0].length;
+
+        for (int i = 0; i < x; i++){
+            for (int j = 0; j <= y - WIN_COUNT; j++) {
+                int count = 1;
+                int player = field[i][j];
+                for (int l = 1; l < WIN_COUNT; l++) {
+                    if (player != 0 && player == field[i][j + l]) {
+                        count++;
+                    } else {
+                        break;
+                    }
+                }
+                if (count == WIN_COUNT) {
+                    return true;
                 }
             }
-
-
-
+        }
         return false;
     }
 
